@@ -1,5 +1,3 @@
-cheating-game
-=============
 Student [] students;
 Paper paper;
 Teacher teacher;
@@ -15,17 +13,18 @@ int status;
 
 void setup() {
  status = GAME_START;
+   paper = new Paper(100,150);
  size(640,480);
  background(0, 0, 0);
  rectMode(CENTER);
- students = new Student[30];
- studentMaker(30,5);
+ students = new Student[20];
+ studentMaker(20,5);
  for (int i=0; i<students.length; i++){
     students[i].display();
   }
   teacher = new Teacher(100,70);
   eyelaser = new EyeLaser();
-  paper = new Paper(100,100);
+
 }
 
 void draw() {
@@ -41,15 +40,17 @@ void draw() {
     break;
   case GAME_PLAYING:
     background(50, 50, 50);
+      paper.keyTyped();     
+      paper.display();  
 
-    drawLife();
-    teacher.display(); 
-    drawStudent();
-    drawEyeLaser();
+//    drawLife();
+    teacher.display();
     drawPaper();
  for (int i=0; i<students.length; i++){
-    students[i].display();
+   students[i].display();
   }
+    drawEyeLaser();
+    
     break;
 
   case GAME_PAUSE:
@@ -70,7 +71,6 @@ void draw() {
 
 void keyPressed() {
   if (status == GAME_PLAYING) {
-    teacher.keyTyped();
     paper.keyTyped();
   }
   statusCtrl();
@@ -78,10 +78,10 @@ void keyPressed() {
 
 void studentMaker(int total, int numInRow) {
 
-  int ox = 30; 
-  int oy = 30; 
-  int xSpacing = 50; 
-  int ySpacing = 50; 
+  int ox = 100; 
+  int oy = 150; 
+  int xSpacing = 100; 
+  int ySpacing = 80; 
 
   for (int i=0; i <total; ++i) {
 
@@ -92,19 +92,11 @@ void studentMaker(int total, int numInRow) {
   }
 }
 
-void drawStudent() {
-  for (int i=0; i<students.length-1; i++) {
-    Student student = students[i];
-      //students[i].move();    
-     // students[i].display(); 
-  }
-}
 
-
-void drawLife() {
+/*void drawLife() {
   fill(230, 74, 96);
   text("LIFE:", 36, 455);
-  /*---------Draw Ship Life---------*/
+
   int ox = 78; 
   int oy = 459;
   int spacing = 25;
@@ -115,20 +107,20 @@ void drawLife() {
     int y = oy;
     ellipse(x, y, diameter, diameter);
   }
-}
+}*/
 
 void drawPaper() {
-    if (paper!=null && !paper.gone) { // Check Array isn't empty and bullet still exist
-      paper.keyTyped();     //Move Bullet
-      paper.display();  //Draw Bullet on the Screen
+    if (paper!=null && !paper.gone) {
+      paper.keyTyped();     
+      paper.display();  
   }
 }
 
 void drawEyeLaser() {
 
-    if (eyelaser!=null && !eyelaser.gone) { // Check Array isn't empty and Laser still exist
-      eyelaser.move();      //Move Laser
-      eyelaser.display();   //Draw Laser
+    if (eyelaser!=null && !eyelaser.gone) { 
+      eyelaser.move();     
+      eyelaser.display();   
   }
 }
 
@@ -145,13 +137,13 @@ void printText(int x, int y, int size1, int size2, int distance, String line1, S
   text(line2, x, y+distance);
 }
 
-void reset() {
+/*void reset() {
   for (int i=0; i<students.length-1; i++) {
     students[i] = null;
   }
 
 
-}
+}*/
 
 void statusCtrl() {
   if (key == ENTER) {
@@ -159,11 +151,9 @@ void statusCtrl() {
 
     case GAME_START:
       status = GAME_PLAYING;
-      reset();
+//      reset();
 
       break;
-
-      /*-----------add things here--------*/
 
     case GAME_PLAYING:
       status = GAME_PAUSE;
@@ -176,12 +166,12 @@ void statusCtrl() {
 
     case GAME_WIN:
       status = GAME_PLAYING;
-      reset();
+//      reset();
       break;
 
     case GAME_LOSE:
       status = GAME_PLAYING;
-      reset();
+//      reset();
       break;
     }
   }
