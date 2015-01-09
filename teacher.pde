@@ -1,7 +1,7 @@
 class Teacher {
   int speedL = 10;
   int speedR = 10;
-  int tSize = 20;
+  int tSize = 50;
   int tX;
   int tY;
   boolean upGrade = false;
@@ -14,7 +14,7 @@ class Teacher {
   void display() {
 
       fill(230, 74, 96);
-      ellipse(tX, tY, tSize/2, tSize/2);
+      ellipse(tX, tY, tSize, tSize);
     
   }
 
