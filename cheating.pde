@@ -50,7 +50,8 @@ void draw() {
    students[i].display();
   }
     drawEyeLaser();
-    
+    checkWin();
+    checkLose();    
     break;
 
   case GAME_PAUSE:
@@ -92,7 +93,25 @@ void studentMaker(int total, int numInRow) {
   }
 }
 
+void checkWin() {
+   int i=int(random(20));  
+  if(key == ' ' && paper.pX <= students[i].sX && paper.pX >= students[i].sX-80 
+  && paper.pY <= students[i].sY+20 && paper.pY >= students[i].sY-20) {
+    status = GAME_WIN;
+  }
+}
 
+void checkLose() {  
+    for (int j=0; j<students.length-1; j++) {
+  Student student = students[j];
+  if( paper.pY > student.sY+20 && paper.pY < student.sY+100) {
+      if( paper.pX >= eyelaser.eX && paper.pX <= eyelaser.eX+eyelaser.eSize 
+  && paper.pY <= eyelaser.eY+2*eyelaser.eSize && paper.pY >= eyelaser.eY) {
+    status = GAME_LOSE;
+  }
+  }
+}
+}
 /*void drawLife() {
   fill(230, 74, 96);
   text("LIFE:", 36, 455);
