@@ -3,7 +3,7 @@ class Paper {
   int pX;
   int pY;
   int SpeedU, SpeedD, SpeedR, SpeedL= 0;
-  int pSize = 3;
+  int pSize = 10;
   boolean gone = false;
 
 
@@ -19,31 +19,30 @@ class Paper {
 
   void keyTyped() {
 
-    //Limit Paper Position
-    if (pX+pSize >= 640) {
-      SpeedR = 0;
-    } else if (pX-pSize <= 0) {
-      SpeedL = 0;
-    } else if (pX-pSize > 0 && pX+pSize<640) {
-      SpeedU= SpeedD= SpeedR= SpeedL= 10;
+       if (key == CODED ) {
+      switch(keyCode){
+        case UP:
+          pY -= 80;
+          break;
+        case DOWN:
+          pY += 80;
+          break;
+        case LEFT:
+          pX -= 100;
+          break;
+        case RIGHT:
+          pX += 100;
+          break;
     }
-
-    //Ship Ctrl
-    if (key == CODED) {
-      switch(keyCode) {
-      case LEFT:
-        this.pX -= SpeedL;
-        break;
-      case RIGHT:
-        this.pX += SpeedR;
-        break;
-      case UP:
-        this.pY -= SpeedU;
-        break;
-      case DOWN:
-        this.pY += SpeedD;
-        break;
-      }
+     if(pX >= width - 150){
+      pX = width - 150;
+    }else if(pX < 100){
+      pX = 100;
+    }else if(pY >= height - 120){
+      pY = height - 120;
+    }else if(pY <= 120){
+      pY = 120;
     }
   }
+}
 }
