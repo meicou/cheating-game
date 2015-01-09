@@ -2,10 +2,9 @@ class EyeLaser {
 
   int eX;
   int eY;
-  int eSpeedX = 0;
-  int eSpeedY = 3;
+  float eSpeed;
   int eSize = 100;
-  float rot;
+  float rot=0;
   boolean gone = false;
 
 
@@ -21,8 +20,13 @@ class EyeLaser {
   }
 
   void move() {
+
   translate(eX,eY);
   rotate(rot);
-  rot += PI/30;
+  eSpeed = 0.005;
+  rot += eSpeed;
+    if(rot >=0.009) {
+      eSpeed*= -1;
+     }
   }
 }
