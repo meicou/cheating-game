@@ -4,43 +4,52 @@ class Teacher {
   int tSize = 50;
   int tX;
   int tY;
-  boolean upGrade = false;
+  int state = 0;
 
   Teacher(int x, int y) {
     this.tX = x;
     this.tY = y;
   } 
-
+  
   void display() {
-
       fill(230, 74, 96);
       ellipse(tX, tY, tSize, tSize);
-    
+  }
+  
+  
+  void move(){
+   
+   switch(state){
+         case 0:
+               tX += 1;
+               if(tX > 590){
+                  tX = 590;
+                  state = 1;
+               }
+               break;
+         case 1:
+              tY += 1;
+              if(tY > 430){
+                tY = 430;
+                state = 2;
+             }
+             break;
+         case 2:
+              tX -= 1;
+              if(tX < 50){
+                  tX = 50;
+                  state = 3;
+              }
+             break;
+   
+        case 3:
+             tY -= 1;
+             if(tY < 50){
+                tY = 50;
+                state = 0;
+             }
+             break;
+     }   
   }
 
-
-  void keyTyped() {
-
-    //Limit Ship Position
-    if (tX+tSize >= 640) {
-      speedR = 0;
-    } else if (tX-tSize <= 0) {
-      speedL = 0;
-    } else if (tX-tSize > 0 && tX+tSize<640) {
-      speedL = 10;
-      speedR = 10;
-    }
-
-    //Ship Ctrl
-    if (key == CODED) {
-      switch(keyCode) {
-      case LEFT:
-        this.tX -= speedL;
-        break;
-      case RIGHT:
-        this.tX += speedR;
-        break;
-      }
-    }
-  }
 }
