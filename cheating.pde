@@ -89,14 +89,14 @@ void keyPressed() {
     if(paper.pX >= width - 150){
       paper.pX = width - 150;
     } 
-    if(paper.pX < 100){
-      paper.pX = 100;
+    if(paper.pX < 150){
+      paper.pX = 150;
     }
     if(paper.pY >= height - 120){
       paper.pY = height - 120;
     }
-    if(paper.pY <= 120){
-      paper.pY = 120;
+    if(paper.pY <= 150){
+      paper.pY = 150;
     }
   }
   }
@@ -130,7 +130,7 @@ void checkWin() {
 void checkLose() {  
     for (int j=0; j<students.length-1; j++) {
   Student student = students[j];
-  if( paper.pY > student.sY+20 && paper.pY < student.sY+100 && 
+  if( paper.pY > student.sY+20 && paper.pY < student.sY+100 && paper.pX > student.sX+40 && paper.pX < student.sX+200 &&
   paper.pX >= eyelaser.eX && paper.pX <= eyelaser.eX+eyelaser.eSize 
   && paper.pY <= eyelaser.eY+2*eyelaser.eSize && paper.pY >= eyelaser.eY) {
 
